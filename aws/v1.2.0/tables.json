@@ -1,0 +1,1919 @@
+{
+  "plugin": "aws",
+  "version": "v1.2.0",
+  "tables": [
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning cloud account identifier (e.g., 12-digit AWS account ID or Cloudflare account ID)",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Amazon Resource Name (ARN) uniquely identifying the AWS resource globally",
+          "name": "arn",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'user_id' of aws_accounts (user id)",
+          "name": "user_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'alias' of aws_accounts (alias)",
+          "name": "alias",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "AWS STS caller account metadata",
+      "name": "aws_accounts",
+      "parent": null,
+      "primary_key": [
+        "account_id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning cloud account identifier (e.g., 12-digit AWS account ID or Cloudflare account ID)",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Unique provider identifier for this row in aws_cloudfront_distributions",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Amazon Resource Name (ARN) uniquely identifying the AWS resource globally",
+          "name": "arn",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'domain_name' of aws_cloudfront_distributions (domain name)",
+          "name": "domain_name",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Current lifecycle or operational status of the resource (e.g., active, running, pending_validation)",
+          "name": "status",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "Attribute 'enabled' of aws_cloudfront_distributions (enabled)",
+          "name": "enabled",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'web_acl_id' of aws_cloudfront_distributions (web acl id)",
+          "name": "web_acl_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'aliases' of aws_cloudfront_distributions (aliases)",
+          "name": "aliases",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'origins' of aws_cloudfront_distributions (origins)",
+          "name": "origins",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'viewer_certificate' of aws_cloudfront_distributions (viewer certificate)",
+          "name": "viewer_certificate",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "AWS CloudFront CDN distributions",
+      "name": "aws_cloudfront_distributions",
+      "parent": null,
+      "primary_key": [
+        "account_id",
+        "id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning cloud account identifier (e.g., 12-digit AWS account ID or Cloudflare account ID)",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloud geographic region code (e.g., us-east-1, eu-west-1, or global)",
+          "name": "region",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Unique provider identifier for this row in aws_cognito_user_pools",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Human-readable resource or domain name in aws_cognito_user_pools",
+          "name": "name",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Current lifecycle or operational status of the resource (e.g., active, running, pending_validation)",
+          "name": "status",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Multi-Factor Authentication (MFA/2FA) enforcement status for the identity or user",
+          "name": "mfa_configuration",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'creation_date' of aws_cognito_user_pools (creation date)",
+          "name": "creation_date",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'last_modified_date' of aws_cognito_user_pools (last modified date)",
+          "name": "last_modified_date",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "AWS Cognito User Pools",
+      "name": "aws_cognito_user_pools",
+      "parent": null,
+      "primary_key": [
+        "account_id",
+        "region",
+        "id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning cloud account identifier (e.g., 12-digit AWS account ID or Cloudflare account ID)",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloud geographic region code (e.g., us-east-1, eu-west-1, or global)",
+          "name": "region",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'table_name' of aws_dynamodb_tables (table name)",
+          "name": "table_name",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Amazon Resource Name (ARN) uniquely identifying the AWS resource globally",
+          "name": "table_arn",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Current lifecycle or operational status of the resource (e.g., active, running, pending_validation)",
+          "name": "table_status",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Int64",
+          "description": "Attribute 'item_count' of aws_dynamodb_tables (item count)",
+          "name": "item_count",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Int64",
+          "description": "Attribute 'table_size_bytes' of aws_dynamodb_tables (table size bytes)",
+          "name": "table_size_bytes",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'billing_mode' of aws_dynamodb_tables (billing mode)",
+          "name": "billing_mode",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'sse_description' of aws_dynamodb_tables (sse description)",
+          "name": "sse_description",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "AWS DynamoDB tables",
+      "name": "aws_dynamodb_tables",
+      "parent": null,
+      "primary_key": [
+        "account_id",
+        "region",
+        "table_name"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning cloud account identifier (e.g., 12-digit AWS account ID or Cloudflare account ID)",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloud geographic region code (e.g., us-east-1, eu-west-1, or global)",
+          "name": "region",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'architecture' of aws_ec2_images (architecture)",
+          "name": "architecture",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'creation_date' of aws_ec2_images (creation date)",
+          "name": "creation_date",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'image_id' of aws_ec2_images (image id)",
+          "name": "image_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Human-readable resource or domain name in aws_ec2_images",
+          "name": "name",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "Attribute 'public' of aws_ec2_images (public)",
+          "name": "public",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Current lifecycle or operational status of the resource (e.g., active, running, pending_validation)",
+          "name": "state",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "AWS EC2 Amazon Machine Images (AMIs) owned by the account",
+      "name": "aws_ec2_images",
+      "parent": null,
+      "primary_key": [
+        "account_id",
+        "region",
+        "image_id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning cloud account identifier (e.g., 12-digit AWS account ID or Cloudflare account ID)",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloud geographic region code (e.g., us-east-1, eu-west-1, or global)",
+          "name": "region",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'iam_instance_profile_arn' of aws_ec2_instances (iam instance profile arn)",
+          "name": "iam_instance_profile_arn",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'image_id' of aws_ec2_instances (image id)",
+          "name": "image_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'instance_id' of aws_ec2_instances (instance id)",
+          "name": "instance_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Resource classification or compute/DNS record type (e.g., A, CNAME, t4g.small, gp3)",
+          "name": "instance_type",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Private RFC1918 IPv4 address inside the VPC subnet",
+          "name": "private_ip_address",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Publicly routable IPv4 address assigned to the resource, or empty if private",
+          "name": "public_ip_address",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'security_groups' of aws_ec2_instances (security groups)",
+          "name": "security_groups",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Current lifecycle or operational status of the resource (e.g., active, running, pending_validation)",
+          "name": "state",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "AWS VPC Subnet identifier hosting this resource",
+          "name": "subnet_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "JSON key-value resource tags assigned for cost allocation, ownership, or environment tracking",
+          "name": "tags",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "AWS Virtual Private Cloud (VPC) identifier hosting this resource",
+          "name": "vpc_id",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "AWS EC2 compute instances across accounts and regions",
+      "name": "aws_ec2_instances",
+      "parent": null,
+      "primary_key": [
+        "account_id",
+        "region",
+        "instance_id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning cloud account identifier (e.g., 12-digit AWS account ID or Cloudflare account ID)",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloud geographic region code (e.g., us-east-1, eu-west-1, or global)",
+          "name": "region",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'attachment' of aws_ec2_network_interfaces (attachment)",
+          "name": "attachment",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'groups' of aws_ec2_network_interfaces (groups)",
+          "name": "groups",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'network_interface_id' of aws_ec2_network_interfaces (network interface id)",
+          "name": "network_interface_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Private RFC1918 IPv4 address inside the VPC subnet",
+          "name": "private_ip_address",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Publicly routable IPv4 address assigned to the resource, or empty if private",
+          "name": "public_ip",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Current lifecycle or operational status of the resource (e.g., active, running, pending_validation)",
+          "name": "status",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "AWS VPC Subnet identifier hosting this resource",
+          "name": "subnet_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "AWS Virtual Private Cloud (VPC) identifier hosting this resource",
+          "name": "vpc_id",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "AWS EC2 elastic network interfaces (ENIs)",
+      "name": "aws_ec2_network_interfaces",
+      "parent": null,
+      "primary_key": [
+        "account_id",
+        "region",
+        "network_interface_id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning cloud account identifier (e.g., 12-digit AWS account ID or Cloudflare account ID)",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloud geographic region code (e.g., us-east-1, eu-west-1, or global)",
+          "name": "region",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'associations' of aws_ec2_route_tables (associations)",
+          "name": "associations",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'route_table_id' of aws_ec2_route_tables (route table id)",
+          "name": "route_table_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'routes' of aws_ec2_route_tables (routes)",
+          "name": "routes",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "JSON key-value resource tags assigned for cost allocation, ownership, or environment tracking",
+          "name": "tags",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "AWS Virtual Private Cloud (VPC) identifier hosting this resource",
+          "name": "vpc_id",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "AWS VPC route tables",
+      "name": "aws_ec2_route_tables",
+      "parent": null,
+      "primary_key": [
+        "account_id",
+        "region",
+        "route_table_id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning cloud account identifier (e.g., 12-digit AWS account ID or Cloudflare account ID)",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloud geographic region code (e.g., us-east-1, eu-west-1, or global)",
+          "name": "region",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'description' of aws_ec2_security_groups (description)",
+          "name": "description",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'group_id' of aws_ec2_security_groups (group id)",
+          "name": "group_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'group_name' of aws_ec2_security_groups (group name)",
+          "name": "group_name",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'ip_permissions' of aws_ec2_security_groups (ip permissions)",
+          "name": "ip_permissions",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'ip_permissions_egress' of aws_ec2_security_groups (ip permissions egress)",
+          "name": "ip_permissions_egress",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "JSON key-value resource tags assigned for cost allocation, ownership, or environment tracking",
+          "name": "tags",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "AWS Virtual Private Cloud (VPC) identifier hosting this resource",
+          "name": "vpc_id",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "AWS EC2/VPC security groups and ingress/egress rules",
+      "name": "aws_ec2_security_groups",
+      "parent": null,
+      "primary_key": [
+        "account_id",
+        "region",
+        "group_id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning cloud account identifier (e.g., 12-digit AWS account ID or Cloudflare account ID)",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloud geographic region code (e.g., us-east-1, eu-west-1, or global)",
+          "name": "region",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'availability_zone' of aws_ec2_subnets (availability zone)",
+          "name": "availability_zone",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Int64",
+          "description": "Attribute 'available_ip_address_count' of aws_ec2_subnets (available ip address count)",
+          "name": "available_ip_address_count",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'cidr_block' of aws_ec2_subnets (cidr block)",
+          "name": "cidr_block",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "Attribute 'map_public_ip_on_launch' of aws_ec2_subnets (map public ip on launch)",
+          "name": "map_public_ip_on_launch",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "AWS VPC Subnet identifier hosting this resource",
+          "name": "subnet_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "JSON key-value resource tags assigned for cost allocation, ownership, or environment tracking",
+          "name": "tags",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "AWS Virtual Private Cloud (VPC) identifier hosting this resource",
+          "name": "vpc_id",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "AWS VPC subnets",
+      "name": "aws_ec2_subnets",
+      "parent": null,
+      "primary_key": [
+        "account_id",
+        "region",
+        "subnet_id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning cloud account identifier (e.g., 12-digit AWS account ID or Cloudflare account ID)",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloud geographic region code (e.g., us-east-1, eu-west-1, or global)",
+          "name": "region",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'attachments' of aws_ec2_volumes (attachments)",
+          "name": "attachments",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'availability_zone' of aws_ec2_volumes (availability zone)",
+          "name": "availability_zone",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "True if storage volume or resource is encrypted at rest",
+          "name": "encrypted",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'kms_key_id' of aws_ec2_volumes (kms key id)",
+          "name": "kms_key_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Int64",
+          "description": "Attribute 'size' of aws_ec2_volumes (size)",
+          "name": "size",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Current lifecycle or operational status of the resource (e.g., active, running, pending_validation)",
+          "name": "state",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "JSON key-value resource tags assigned for cost allocation, ownership, or environment tracking",
+          "name": "tags",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'volume_id' of aws_ec2_volumes (volume id)",
+          "name": "volume_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Resource classification or compute/DNS record type (e.g., A, CNAME, t4g.small, gp3)",
+          "name": "volume_type",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "AWS EBS volumes",
+      "name": "aws_ec2_volumes",
+      "parent": null,
+      "primary_key": [
+        "account_id",
+        "region",
+        "volume_id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning cloud account identifier (e.g., 12-digit AWS account ID or Cloudflare account ID)",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloud geographic region code (e.g., us-east-1, eu-west-1, or global)",
+          "name": "region",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'cidr_block' of aws_ec2_vpcs (cidr block)",
+          "name": "cidr_block",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "Attribute 'is_default' of aws_ec2_vpcs (is default)",
+          "name": "is_default",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Current lifecycle or operational status of the resource (e.g., active, running, pending_validation)",
+          "name": "state",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "JSON key-value resource tags assigned for cost allocation, ownership, or environment tracking",
+          "name": "tags",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "AWS Virtual Private Cloud (VPC) identifier hosting this resource",
+          "name": "vpc_id",
+          "nullable": false,
+          "primary_key": true
+        }
+      ],
+      "description": "AWS Virtual Private Clouds (VPCs)",
+      "name": "aws_ec2_vpcs",
+      "parent": null,
+      "primary_key": [
+        "account_id",
+        "region",
+        "vpc_id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning cloud account identifier (e.g., 12-digit AWS account ID or Cloudflare account ID)",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'user_id' of aws_iam_users (user id)",
+          "name": "user_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'user_name' of aws_iam_users (user name)",
+          "name": "user_name",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Amazon Resource Name (ARN) uniquely identifying the AWS resource globally",
+          "name": "arn",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'create_date' of aws_iam_users (create date)",
+          "name": "create_date",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'password_last_used' of aws_iam_users (password last used)",
+          "name": "password_last_used",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "Multi-Factor Authentication (MFA/2FA) enforcement status for the identity or user",
+          "name": "mfa_enabled",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "JSON key-value resource tags assigned for cost allocation, ownership, or environment tracking",
+          "name": "tags",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "AWS IAM users, MFA posture, and access key metadata",
+      "name": "aws_iam_users",
+      "parent": null,
+      "primary_key": [
+        "account_id",
+        "user_id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning cloud account identifier (e.g., 12-digit AWS account ID or Cloudflare account ID)",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloud geographic region code (e.g., us-east-1, eu-west-1, or global)",
+          "name": "region",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'function_name' of aws_lambda_functions (function name)",
+          "name": "function_name",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Amazon Resource Name (ARN) uniquely identifying the AWS resource globally",
+          "name": "function_arn",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'runtime' of aws_lambda_functions (runtime)",
+          "name": "runtime",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'role' of aws_lambda_functions (role)",
+          "name": "role",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'handler' of aws_lambda_functions (handler)",
+          "name": "handler",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Int64",
+          "description": "Attribute 'memory_size' of aws_lambda_functions (memory size)",
+          "name": "memory_size",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Int64",
+          "description": "Attribute 'timeout' of aws_lambda_functions (timeout)",
+          "name": "timeout",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'last_modified' of aws_lambda_functions (last modified)",
+          "name": "last_modified",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'vpc_config' of aws_lambda_functions (vpc config)",
+          "name": "vpc_config",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "AWS Lambda serverless functions",
+      "name": "aws_lambda_functions",
+      "parent": null,
+      "primary_key": [
+        "account_id",
+        "region",
+        "function_name"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning cloud account identifier (e.g., 12-digit AWS account ID or Cloudflare account ID)",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'hosted_zone_id' of aws_route53_hosted_zone_resource_record_sets (hosted zone id)",
+          "name": "hosted_zone_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Human-readable resource or domain name in aws_route53_hosted_zone_resource_record_sets",
+          "name": "name",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Resource classification or compute/DNS record type (e.g., A, CNAME, t4g.small, gp3)",
+          "name": "type",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Int64",
+          "description": "Attribute 'ttl' of aws_route53_hosted_zone_resource_record_sets (ttl)",
+          "name": "ttl",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'records' of aws_route53_hosted_zone_resource_record_sets (records)",
+          "name": "records",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'alias_target' of aws_route53_hosted_zone_resource_record_sets (alias target)",
+          "name": "alias_target",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "AWS Route53 DNS resource record sets per hosted zone",
+      "name": "aws_route53_hosted_zone_resource_record_sets",
+      "parent": "aws_route53_hosted_zones",
+      "primary_key": [
+        "account_id",
+        "hosted_zone_id",
+        "name",
+        "type"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning cloud account identifier (e.g., 12-digit AWS account ID or Cloudflare account ID)",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Unique provider identifier for this row in aws_route53_hosted_zones",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Human-readable resource or domain name in aws_route53_hosted_zones",
+          "name": "name",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "Attribute 'private_zone' of aws_route53_hosted_zones (private zone)",
+          "name": "private_zone",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Int64",
+          "description": "Attribute 'resource_record_set_count' of aws_route53_hosted_zones (resource record set count)",
+          "name": "resource_record_set_count",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'comment' of aws_route53_hosted_zones (comment)",
+          "name": "comment",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "AWS Route53 public and private hosted zones",
+      "name": "aws_route53_hosted_zones",
+      "parent": null,
+      "primary_key": [
+        "account_id",
+        "id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning cloud account identifier (e.g., 12-digit AWS account ID or Cloudflare account ID)",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Human-readable resource or domain name in aws_s3_buckets",
+          "name": "name",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloud geographic region code (e.g., us-east-1, eu-west-1, or global)",
+          "name": "region",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'creation_date' of aws_s3_buckets (creation date)",
+          "name": "creation_date",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'encryption_rules' of aws_s3_buckets (encryption rules)",
+          "name": "encryption_rules",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'public_access_block' of aws_s3_buckets (public access block)",
+          "name": "public_access_block",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'versioning_status' of aws_s3_buckets (versioning status)",
+          "name": "versioning_status",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "AWS S3 buckets and encryption/public-access posture",
+      "name": "aws_s3_buckets",
+      "parent": null,
+      "primary_key": [
+        "account_id",
+        "name"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning cloud account identifier (e.g., 12-digit AWS account ID or Cloudflare account ID)",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloud geographic region code (e.g., us-east-1, eu-west-1, or global)",
+          "name": "region",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'scope' of aws_wafv2_web_acls (scope)",
+          "name": "scope",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Unique provider identifier for this row in aws_wafv2_web_acls",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Human-readable resource or domain name in aws_wafv2_web_acls",
+          "name": "name",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Amazon Resource Name (ARN) uniquely identifying the AWS resource globally",
+          "name": "arn",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'default_action' of aws_wafv2_web_acls (default action)",
+          "name": "default_action",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'rules' of aws_wafv2_web_acls (rules)",
+          "name": "rules",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attribute 'visibility_config' of aws_wafv2_web_acls (visibility config)",
+          "name": "visibility_config",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "AWS WAFv2 Regional and CloudFront Web ACLs",
+      "name": "aws_wafv2_web_acls",
+      "parent": null,
+      "primary_key": [
+        "account_id",
+        "region",
+        "scope",
+        "id"
+      ]
+    }
+  ]
+}

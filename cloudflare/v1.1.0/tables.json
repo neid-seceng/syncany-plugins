@@ -1,0 +1,2932 @@
+{
+  "plugin": "cloudflare",
+  "version": "v1.1.0",
+  "tables": [
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning Cloudflare account identifier",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Zone identifier if scoped to a specific zone",
+          "name": "zone_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Access application unique identifier",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Access application universal identifier",
+          "name": "uid",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Application display name",
+          "name": "name",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Primary protected domain/URL of the application",
+          "name": "domain",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Application type (self_hosted, saas, ssh, vnc, app_launcher, warp, bookmark)",
+          "name": "type",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Token session duration (e.g., 24h)",
+          "name": "session_duration",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Identity Provider IDs permitted to authenticate (JSON array)",
+          "name": "allowed_idps",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "True if users skip the IdP selector and redirect immediately",
+          "name": "auto_redirect_to_identity",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "True if sticky binding cookie is enabled",
+          "name": "enable_binding_cookie",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Custom message displayed when access is denied",
+          "name": "custom_deny_message",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Redirect URL when access is denied",
+          "name": "custom_deny_url",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "SameSite cookie attribute (strict, lax, none)",
+          "name": "same_site_cookie_attribute",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "True if HttpOnly flag is set on the Access JWT cookie",
+          "name": "http_only_cookie_attribute",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Application logo URL",
+          "name": "logo_url",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "True if automatic cloudflared authentication skips interstitial page",
+          "name": "skip_interstitial",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "True if visible in the Zero Trust App Launcher",
+          "name": "app_launcher_visible",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "True if non-interactive service auth returns 401 instead of 302",
+          "name": "service_auth_401_redirect",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "CORS header configuration for the Access application (JSON)",
+          "name": "cors_headers",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC creation timestamp",
+          "name": "created_at",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC last update timestamp",
+          "name": "updated_at",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Application Audience (AUD) tag for JWT verification",
+          "name": "aud",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "All domains/subdomains protected by this application (JSON array)",
+          "name": "self_hosted_domains",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "Cloudflare Zero Trust Access applications configured at account or zone level (CloudQuery cloudflare_access_applications)",
+      "name": "cloudflare_access_applications",
+      "parent": "cloudflare_accounts",
+      "primary_key": [
+        "account_id",
+        "id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning Cloudflare account identifier",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Zone identifier if zone-scoped",
+          "name": "zone_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Access group unique identifier",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Access group name",
+          "name": "name",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC creation timestamp",
+          "name": "created_at",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC last update timestamp",
+          "name": "updated_at",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Positive matching identity/device/IP rules (JSON array)",
+          "name": "include",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Explicitly excluded identity/IP rules (JSON array)",
+          "name": "exclude",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Mandatory requirements such as MFA, posture check, or country (JSON array)",
+          "name": "require",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "True if this is the default group",
+          "name": "is_default",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "Cloudflare Zero Trust Access groups defining reusable include/exclude/require identity rules (CloudQuery cloudflare_access_groups)",
+      "name": "cloudflare_access_groups",
+      "parent": "cloudflare_accounts",
+      "primary_key": [
+        "account_id",
+        "id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning Cloudflare account identifier",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Account membership identifier",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Invitation verification code",
+          "name": "code",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Membership invitation status (accepted, pending, rejected)",
+          "name": "status",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "User profile object including id, first_name, last_name, email, two_factor_authentication_enabled (JSON)",
+          "name": "user",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Email address of the account member",
+          "name": "user_email",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "True if the user has Two-Factor Authentication (2FA) enabled",
+          "name": "user_two_factor_enabled",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Array of RBAC roles assigned to this member (JSON)",
+          "name": "roles",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Array of fine-grained permission policies assigned to this member (JSON)",
+          "name": "policies",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "Cloudflare account members, roles, MFA status, and access policies (CloudQuery cloudflare_account_members)",
+      "name": "cloudflare_account_members",
+      "parent": "cloudflare_accounts",
+      "primary_key": [
+        "account_id",
+        "id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning Cloudflare account identifier",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Ruleset unique identifier",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Alias of the ruleset identifier for cross-table joins",
+          "name": "ruleset_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Human-readable name of the ruleset",
+          "name": "name",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Informative description of the ruleset",
+          "name": "description",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Ruleset kind (managed, custom, root, zone)",
+          "name": "kind",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Execution phase (e.g., http_request_firewall_custom, http_request_firewall_managed, ddos_l7)",
+          "name": "phase",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Current version number of the ruleset",
+          "name": "version",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC timestamp when the ruleset was last modified",
+          "name": "last_updated",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Origin subsystem of the ruleset",
+          "name": "source",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "Account-wide Cloudflare WAF, DDoS, and Magic Transit rulesets (CloudQuery cloudflare_account_rulesets)",
+      "name": "cloudflare_account_rulesets",
+      "parent": "cloudflare_accounts",
+      "primary_key": [
+        "account_id",
+        "id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloudflare Account unique identifier",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Human-readable Cloudflare account name",
+          "name": "name",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Account type (e.g., standard, enterprise)",
+          "name": "type",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC timestamp when the account was created",
+          "name": "created_on",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Parent organization metadata managing this account (JSON)",
+          "name": "managed_by",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Account security and two-factor enforcement settings (JSON)",
+          "name": "settings",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Legacy entitlement flags for the account (JSON)",
+          "name": "legacy_flags",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "Cloudflare accounts accessible to the API token (CloudQuery cloudflare_accounts)",
+      "name": "cloudflare_accounts",
+      "parent": null,
+      "primary_key": [
+        "id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloudflare Zone identifier",
+          "name": "zone_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Domain name of the zone",
+          "name": "zone_name",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning Cloudflare account identifier",
+          "name": "account_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Certificate pack unique identifier",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Certificate pack type (universal, advanced, custom, sni_custom)",
+          "name": "type",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Lifecycle status (active, pending_validation, pending_issuance, pending_deployment, expired)",
+          "name": "status",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Covered SAN hostnames/wildcards (JSON array)",
+          "name": "hosts",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Issued X.509 certificates in the pack including issuer, signature, expires_on, uploaded_on (JSON array)",
+          "name": "certificates",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Identifier of the primary certificate in the pack",
+          "name": "primary_certificate",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Issuing CA (lets_encrypt, google, ssl_com, digicert, sectigo)",
+          "name": "certificate_authority",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Domain Control Validation method (txt, http, cname, email)",
+          "name": "validation_method",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ACME DCV validation token records (txt_name, txt_value, http_url, status) (JSON array)",
+          "name": "validation_records",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "CA validation error messages if issuance failed or stalled (JSON array)",
+          "name": "validation_errors",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Int64",
+          "description": "Certificate validity period in days (e.g., 90)",
+          "name": "validity_days",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "Whether Cloudflare branding is appended to the certificate",
+          "name": "cloudflare_branding",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Delegated DCV CNAME records (JSON array)",
+          "name": "dcv_delegation_records",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "Cloudflare Universal, Advanced, and Custom SSL/TLS certificate packs per zone (CloudQuery cloudflare_certificate_packs)",
+      "name": "cloudflare_certificate_packs",
+      "parent": "cloudflare_zones",
+      "primary_key": [
+        "zone_id",
+        "id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloudflare Zone identifier",
+          "name": "zone_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning Cloudflare account identifier",
+          "name": "account_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Custom hostname unique identifier",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Custom customer vanity hostname",
+          "name": "hostname",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Custom hostname TLS configuration and validation state (JSON)",
+          "name": "ssl",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Custom hostname provisioning status",
+          "name": "status",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Custom origin server hostname override",
+          "name": "custom_origin_server",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Custom origin SNI header override",
+          "name": "custom_origin_sni",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Verification error details (JSON array)",
+          "name": "verification_errors",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "TXT ownership verification record details (JSON)",
+          "name": "ownership_verification",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC timestamp when custom hostname was created",
+          "name": "created_at",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "Cloudflare for SaaS Custom Hostnames and SSL configuration per zone (CloudQuery cloudflare_custom_hostnames)",
+      "name": "cloudflare_custom_hostnames",
+      "parent": "cloudflare_zones",
+      "primary_key": [
+        "zone_id",
+        "id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloudflare Zone identifier",
+          "name": "zone_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Zone domain name owning this DNS record",
+          "name": "zone_name",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning Cloudflare account identifier",
+          "name": "account_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "DNS record unique identifier",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "DNS record type (A, AAAA, CNAME, MX, TXT, NS, SRV, CAA, PTR, HTTPS)",
+          "name": "type",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Fully qualified DNS record name (e.g., app.monitorear.cloud)",
+          "name": "name",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "DNS record value/target (e.g., IPv4 address, hostname, or TXT payload)",
+          "name": "content",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "True if the record type/target can be proxied by Cloudflare",
+          "name": "proxiable",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "True if traffic is proxied through Cloudflare edge/WAF (orange cloud); false if DNS-only exposing origin",
+          "name": "proxied",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Int64",
+          "description": "Time-to-live in seconds (1 = Automatic)",
+          "name": "ttl",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Int64",
+          "description": "MX/SRV/URI record priority",
+          "name": "priority",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "True if routed through Cloudflare Zero Trust private network",
+          "name": "private_routing",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "True if record is locked against modification",
+          "name": "locked",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Operator comment/notes attached to the DNS record",
+          "name": "comment",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC timestamp when comment was last updated",
+          "name": "comment_modified_on",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Custom tags assigned to the DNS record (JSON array)",
+          "name": "tags",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC timestamp when tags were last updated",
+          "name": "tags_modified_on",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Structured record data for SRV/CAA/HTTPS/CERT records (JSON)",
+          "name": "data",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloudflare internal record metadata e.g. auto_added, managed_by_apps (JSON)",
+          "name": "meta",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Record-specific CNAME flattening or IPv4/IPv6 settings (JSON)",
+          "name": "settings",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC timestamp when the DNS record was created",
+          "name": "created_on",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC timestamp when the DNS record was last modified",
+          "name": "modified_on",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "Cloudflare DNS records per zone with full proxy status, TTL, priority, tags, comments, and timestamps (CloudQuery cloudflare_dns_records)",
+      "name": "cloudflare_dns_records",
+      "parent": "cloudflare_zones",
+      "primary_key": [
+        "zone_id",
+        "id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning Cloudflare account identifier",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Image unique identifier",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Original uploaded filename",
+          "name": "filename",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Custom image metadata key-values (JSON)",
+          "name": "meta",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC upload timestamp",
+          "name": "uploaded",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "True if image delivery requires signed URL tokens",
+          "name": "require_signed_urls",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Public delivery variant URLs (JSON array)",
+          "name": "variants",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "True if image is still in draft state",
+          "name": "draft",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "Cloudflare Images stored in the account (CloudQuery cloudflare_images)",
+      "name": "cloudflare_images",
+      "parent": "cloudflare_accounts",
+      "primary_key": [
+        "account_id",
+        "id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloudflare Zone identifier",
+          "name": "zone_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning Cloudflare account identifier",
+          "name": "account_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Page rule unique identifier",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "URL pattern targets matched by this page rule (JSON array)",
+          "name": "targets",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Ordered list of page rule actions applied on match (JSON array)",
+          "name": "actions",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Int64",
+          "description": "Evaluation priority order (higher priority rules evaluate first)",
+          "name": "priority",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Page rule status (active or disabled)",
+          "name": "status",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC timestamp when the page rule was created",
+          "name": "created_on",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC timestamp when the page rule was last modified",
+          "name": "modified_on",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "Cloudflare Page Rules per zone with URL targets, forwarding/cache/security actions, and priority (CloudQuery cloudflare_page_rules)",
+      "name": "cloudflare_page_rules",
+      "parent": "cloudflare_zones",
+      "primary_key": [
+        "zone_id",
+        "id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Security check rule code (e.g., CF-SSL-001, CF-SSL-002, CF-LEAK-001, CF-PROXY-001)",
+          "name": "finding_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloudflare Zone identifier",
+          "name": "zone_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning Cloudflare account identifier",
+          "name": "account_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Affected resource identifier (certificate pack ID, DNS record ID, or setting ID)",
+          "name": "resource_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Zone domain name (e.g., monitorear.cloud, softguard.com, ultraweb.global)",
+          "name": "domain",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Human-readable affected resource descriptor (e.g., 'DNS A app.monitorear.cloud -> 162.248.52.214')",
+          "name": "affected_resource",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC timestamp when the finding was evaluated",
+          "name": "detected_at",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC timestamp when the finding was last updated",
+          "name": "updated_at",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC timestamp if resolved, or null when active",
+          "name": "resolved_at",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Finding lifecycle status (OPEN, RESOLVED, ACCEPTED_RISK)",
+          "name": "status",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Risk severity level (CRITICAL, HIGH, MEDIUM, LOW, INFO)",
+          "name": "severity",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Security domain category (SSL/TLS, Origin Exposure, WAF Coverage)",
+          "name": "category",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Short executive title of the security finding",
+          "name": "title",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Detailed technical description of the misconfiguration",
+          "name": "description",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Underlying architectural or configuration root cause",
+          "name": "root_cause",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Direct business/security impact to the customer",
+          "name": "client_concern",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Structured JSON evidence captured from the Cloudflare API proving the finding",
+          "name": "evidence",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Executive summary of the recommended remediation",
+          "name": "remediation",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Step-by-step technical remediation checklist (JSON array)",
+          "name": "remediation_steps",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Additional operational context and verification notes",
+          "name": "notes",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "Automated Cloudflare security posture & root-cause audit findings with full evidence and remediation steps",
+      "name": "cloudflare_security_findings",
+      "parent": "cloudflare_zones",
+      "primary_key": [
+        "finding_id",
+        "zone_id",
+        "resource_id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloudflare Zone identifier",
+          "name": "zone_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning Cloudflare account identifier",
+          "name": "account_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Parent WAF package identifier",
+          "name": "package_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "CloudQuery-compatible alias for package_id",
+          "name": "waf_package_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "WAF group unique identifier",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "WAF rule group name",
+          "name": "name",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Description of the vulnerability class covered by the group",
+          "name": "description",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Group activation mode (on or off)",
+          "name": "mode",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Allowed activation modes (JSON array)",
+          "name": "allowed_modes",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Int64",
+          "description": "Total number of managed rules in this group",
+          "name": "rules_count",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Int64",
+          "description": "Number of rules in this group with customized mode overrides",
+          "name": "modified_rules_count",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "Cloudflare WAF rule groups inside each WAF package (CloudQuery cloudflare_waf_groups)",
+      "name": "cloudflare_waf_groups",
+      "parent": "cloudflare_zones",
+      "primary_key": [
+        "zone_id",
+        "package_id",
+        "id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloudflare Zone identifier",
+          "name": "zone_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning Cloudflare account identifier",
+          "name": "account_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "WAF override unique identifier",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Description of the URI WAF override",
+          "name": "description",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "True if this WAF override is paused",
+          "name": "paused",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Int64",
+          "description": "Evaluation priority",
+          "name": "priority",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "URL patterns where the WAF override applies (JSON array)",
+          "name": "urls",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Rule-specific action overrides (JSON map)",
+          "name": "rules",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Group-level state overrides (JSON map)",
+          "name": "groups",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Action rewrite mapping (JSON)",
+          "name": "rewrite_action",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "URI-based Cloudflare WAF overrides per zone (CloudQuery cloudflare_waf_overrides)",
+      "name": "cloudflare_waf_overrides",
+      "parent": "cloudflare_zones",
+      "primary_key": [
+        "zone_id",
+        "id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloudflare Zone identifier",
+          "name": "zone_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning Cloudflare account identifier",
+          "name": "account_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "WAF package unique identifier",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "WAF package name (e.g., OWASP ModSecurity Core Rule Set, CloudFlare)",
+          "name": "name",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Description of the WAF rule package",
+          "name": "description",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Detection mode (anomaly or traditional)",
+          "name": "detection_mode",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "OWASP anomaly sensitivity (high, medium, low, off)",
+          "name": "sensitivity",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Triggered action mode (simulate, block, challenge)",
+          "name": "action_mode",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "Cloudflare WAF Managed Packages per zone (CloudQuery cloudflare_waf_packages)",
+      "name": "cloudflare_waf_packages",
+      "parent": "cloudflare_zones",
+      "primary_key": [
+        "zone_id",
+        "id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloudflare Zone identifier",
+          "name": "zone_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning Cloudflare account identifier",
+          "name": "account_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Parent WAF package identifier",
+          "name": "package_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "CloudQuery-compatible alias for package_id",
+          "name": "waf_package_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "WAF rule identifier",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Description of the attack signature matched by this rule",
+          "name": "description",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Rule evaluation priority",
+          "name": "priority",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Default action mode defined by Cloudflare",
+          "name": "default_mode",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured action mode (default, disable, simulate, block, challenge, on, off)",
+          "name": "mode",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning WAF group identifier",
+          "name": "group_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning WAF group object {id, name} (JSON)",
+          "name": "group",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Allowed modes for this rule (JSON array)",
+          "name": "allowed_modes",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "Individual Cloudflare WAF managed rules per package (CloudQuery cloudflare_waf_rules)",
+      "name": "cloudflare_waf_rules",
+      "parent": "cloudflare_zones",
+      "primary_key": [
+        "zone_id",
+        "package_id",
+        "id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning Cloudflare account identifier",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Target Worker script name",
+          "name": "script_name",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cron schedule expression (e.g., */5 * * * *)",
+          "name": "cron",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC timestamp when cron trigger was created",
+          "name": "created_on",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC timestamp when cron trigger was last modified",
+          "name": "modified_on",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "Scheduled Cron Triggers attached to Cloudflare Worker scripts (CloudQuery cloudflare_worker_cron_triggers)",
+      "name": "cloudflare_worker_cron_triggers",
+      "parent": "cloudflare_accounts",
+      "primary_key": [
+        "account_id",
+        "script_name",
+        "cron"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning Cloudflare account identifier",
+          "name": "account_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Worker script name / identifier",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Script content SHA/etag hash",
+          "name": "etag",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Exported Worker event handlers e.g. fetch, scheduled, tail (JSON array)",
+          "name": "handlers",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC timestamp when script was last deployed",
+          "name": "modified_on",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC timestamp when script was first created",
+          "name": "created_on",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Workers billing/usage model (bundled, unbound, standard)",
+          "name": "usage_model",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Workers runtime compatibility date",
+          "name": "compatibility_date",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "True if Workers Trace Events Logpush is enabled",
+          "name": "logpush",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Smart Placement mode",
+          "name": "placement_mode",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Attached tail worker consumers (JSON array)",
+          "name": "tail_consumers",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "Cloudflare Workers scripts deployed in the account (CloudQuery cloudflare_worker_meta_data)",
+      "name": "cloudflare_worker_meta_data",
+      "parent": "cloudflare_accounts",
+      "primary_key": [
+        "account_id",
+        "id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloudflare Zone identifier",
+          "name": "zone_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning Cloudflare account identifier",
+          "name": "account_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Worker route unique identifier",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "URL route matching pattern (e.g., api.example.com/*)",
+          "name": "pattern",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Bound Cloudflare Worker script name (empty if route disables Workers on subpath)",
+          "name": "script",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "True if a Worker script is actively bound to this route",
+          "name": "enabled",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "Cloudflare Workers URL route bindings per zone (CloudQuery cloudflare_worker_routes)",
+      "name": "cloudflare_worker_routes",
+      "parent": "cloudflare_zones",
+      "primary_key": [
+        "zone_id",
+        "id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloudflare Zone identifier",
+          "name": "zone_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Domain name of the zone",
+          "name": "zone_name",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning Cloudflare account identifier",
+          "name": "account_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Parent ruleset identifier",
+          "name": "ruleset_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Parent ruleset name",
+          "name": "ruleset_name",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Parent ruleset execution phase",
+          "name": "ruleset_phase",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Rule unique identifier",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Rule version",
+          "name": "version",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Rule enforcement action (block, managed_challenge, js_challenge, skip, execute, log, rewrite, redirect, route)",
+          "name": "action",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Detailed action parameters including skipped phases, overrides, or target rulesets (JSON)",
+          "name": "action_parameters",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Wirefilter matching expression (e.g., (ip.src eq 1.2.3.4) or (http.request.uri.path contains \"/wp-admin\"))",
+          "name": "expression",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Human-readable description of the rule",
+          "name": "description",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "True if the rule is actively enforced",
+          "name": "enabled",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC timestamp when this rule was last updated",
+          "name": "last_updated",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Logging configuration when rule matches (JSON)",
+          "name": "logging",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "External reference identifier for the rule",
+          "name": "ref",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Threat/vulnerability categories tagged on the rule e.g. wordpress, cve-2021-44228, sqli (JSON array)",
+          "name": "categories",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Rate limiting thresholds, period, and mitigation timeout configuration (JSON)",
+          "name": "ratelimit",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "Individual firewall, WAF, DDoS, rate-limit, and transform rules inside each Cloudflare zone ruleset",
+      "name": "cloudflare_zone_ruleset_rules",
+      "parent": "cloudflare_zones",
+      "primary_key": [
+        "zone_id",
+        "ruleset_id",
+        "id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloudflare Zone identifier",
+          "name": "zone_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Domain name of the zone",
+          "name": "zone_name",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning Cloudflare account identifier",
+          "name": "account_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Ruleset unique identifier",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Ruleset identifier alias for joining with cloudflare_zone_ruleset_rules",
+          "name": "ruleset_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Ruleset name (e.g., default, Cloudflare Managed Ruleset)",
+          "name": "name",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Ruleset description",
+          "name": "description",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Ruleset kind (zone, managed, custom, root)",
+          "name": "kind",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Execution phase (e.g., http_request_firewall_custom, http_request_firewall_managed, http_ratelimit, ddos_l7)",
+          "name": "phase",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Ruleset version string",
+          "name": "version",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC timestamp of the last ruleset update",
+          "name": "last_updated",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Ruleset source subsystem",
+          "name": "source",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "Cloudflare modern Rulesets Engine phases per zone (WAF Custom, WAF Managed, Rate Limiting, DDoS, Transform, Cache, Redirects)",
+      "name": "cloudflare_zone_rulesets",
+      "parent": "cloudflare_zones",
+      "primary_key": [
+        "zone_id",
+        "id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloudflare Zone identifier",
+          "name": "zone_id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Domain name of the zone",
+          "name": "zone_name",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning Cloudflare account identifier",
+          "name": "account_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Setting identifier (e.g., ssl, always_use_https, min_tls_version, security_level, waf, tls_1_3, ech)",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Current setting value as string or JSON (e.g., 'full', 'strict', 'flexible', 'on', 'off', '1.2')",
+          "name": "value",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "True if the current zone plan allows modifying this setting",
+          "name": "editable",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "Normalized boolean flag: true when value is 'on'/'true' or enabled in object",
+          "name": "enabled",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC timestamp when this setting was last changed",
+          "name": "modified_on",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Int64",
+          "description": "Remaining seconds before temporary setting (like development_mode) reverts",
+          "name": "time_remaining",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "Cloudflare zone security, SSL/TLS, WAF, caching, and network settings (~56 settings per zone)",
+      "name": "cloudflare_zone_settings",
+      "parent": "cloudflare_zones",
+      "primary_key": [
+        "zone_id",
+        "id"
+      ]
+    },
+    {
+      "columns": [
+        {
+          "data_type": "Utf8",
+          "description": "Deterministic UUIDv5 unique row identifier computed from table name and primary key",
+          "name": "_syncany_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv5 identifier of the parent resource row when this table is a child relation",
+          "name": "_syncany_parent_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "UUIDv7 execution identifier of the sync run that produced this row",
+          "name": "_syncany_sync_id",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Timestamp(Microsecond, Some(\"UTC\"))",
+          "description": "UTC microsecond timestamp when this row was synchronized",
+          "name": "_syncany_synced_at",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Configured source instance name (e.g., aws-prod, cloudflare-prod) that emitted this row",
+          "name": "_syncany_source_name",
+          "nullable": false,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Cloudflare Zone unique 32-char identifier",
+          "name": "id",
+          "nullable": false,
+          "primary_key": true
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning Cloudflare account object {id, name} (JSON)",
+          "name": "account",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Owning Cloudflare account ID",
+          "name": "account_id",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC timestamp when the zone passed DNS activation",
+          "name": "activated_on",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "CNAME setup suffix for partial (CNAME) zones",
+          "name": "cname_suffix",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC timestamp when the zone was created",
+          "name": "created_on",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Int64",
+          "description": "Seconds remaining in development mode (0 when disabled, >0 when bypassing cache)",
+          "name": "development_mode",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Partner host name if provisioned via Cloudflare partner",
+          "name": "host_name",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Zone quota, page_rule_quota, and phishing_detected metadata (JSON)",
+          "name": "meta",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "ISO-8601 UTC timestamp when the zone configuration was last modified",
+          "name": "modified_on",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Registered domain name of the zone (e.g., softguard.com)",
+          "name": "name",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Assigned Cloudflare authoritative nameservers (JSON array)",
+          "name": "name_servers",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Previous DNS host before migrating to Cloudflare",
+          "name": "original_dnshost",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Nameservers prior to moving to Cloudflare (JSON array)",
+          "name": "original_name_servers",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Domain registrar at the time of onboarding",
+          "name": "original_registrar",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Zone owner object {id, type, email} (JSON)",
+          "name": "owner",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Boolean",
+          "description": "True if Cloudflare traffic processing/proxy is paused for the entire zone",
+          "name": "paused",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "List of API token/user permissions on this zone (JSON array)",
+          "name": "permissions",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Active subscription plan object {id, name, price, currency, frequency, legacy_id} (JSON)",
+          "name": "plan",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Zone operational status (active, pending, initializing, moved, deleted, deactivated)",
+          "name": "status",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Parent tenant object {id, name} (JSON)",
+          "name": "tenant",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Tenant organizational unit {id} (JSON)",
+          "name": "tenant_unit",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Zone hosting type: 'full' (authoritative DNS) or 'partial' (CNAME setup)",
+          "name": "type",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "Custom branded vanity nameservers (JSON array)",
+          "name": "vanity_name_servers",
+          "nullable": true,
+          "primary_key": false
+        },
+        {
+          "data_type": "Utf8",
+          "description": "TXT verification key for partial CNAME zones",
+          "name": "verification_key",
+          "nullable": true,
+          "primary_key": false
+        }
+      ],
+      "description": "Cloudflare DNS zones with full plan, owner, registrar, nameserver, and tenant metadata (CloudQuery cloudflare_zones)",
+      "name": "cloudflare_zones",
+      "parent": null,
+      "primary_key": [
+        "id"
+      ]
+    }
+  ]
+}

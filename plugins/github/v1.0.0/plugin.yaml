@@ -1,0 +1,80 @@
+# ==============================================================================
+# syncany Declarative YAML Plugin: GitHub (v1.0.0)
+# ==============================================================================
+
+name: github
+version: "v1.0.0"
+protocol: yaml
+description: "GitHub Repositories & Branches inventory via REST API v3"
+base_url: "https://api.github.com"
+base_url_env: "GITHUB_API_URL"
+
+auth:
+  type: bearer
+  token_env:
+    - GITHUB_TOKEN
+    - GH_TOKEN
+
+pagination:
+  type: link_header
+  max_pages: 50
+
+tables:
+  - name: github_repositories
+    description: "GitHub repositories accessible to the authenticated token"
+    endpoint: "/user/repos"
+    results_path: ""
+    primary_key:
+      - id
+    columns:
+      - name: id
+        type: int64
+        path: id
+        primary_key: true
+      - name: name
+        type: utf8
+        path: name
+      - name: full_name
+        type: utf8
+        path: full_name
+      - name: private
+        type: bool
+        path: private
+      - name: html_url
+        type: utf8
+        path: html_url
+      - name: default_branch
+        type: utf8
+        path: default_branch
+      - name: visibility
+        type: utf8
+        path: visibility
+      - name: owner_login
+        type: utf8
+        path: owner.login
+      - name: updated_at
+        type: timestamp
+        path: updated_at
+      - name: topics
+        type: list<utf8>
+        path: topics
+    relations:
+      - name: github_branches
+        description: "Branches for each GitHub repository"
+        endpoint: "/repos/{full_name}/branches"
+        parent_id_param: "full_name"
+        results_path: ""
+        primary_key:
+          - name
+        columns:
+          - name: name
+            type: utf8
+            path: name
+            primary_key: true
+          - name: commit_sha
+            type: utf8
+            path: commit.sha
+          - name: protected
+            type: bool
+            path: protected
+

@@ -1,0 +1,139 @@
+name: cloudflare
+version: "v1.1.0"
+protocol: native
+description: "Cloudflare 22-table CloudQuery-compatible source with single-flight API request cache and automated security posture evaluation"
+base_url_env: CLOUDFLARE_API_BASE_URL
+default_base_url: "https://api.cloudflare.com/client/v4"
+auth:
+  type: bearer
+  token_env:
+    - CLOUDFLARE_API_TOKEN
+    - CF_API_TOKEN
+api_endpoints:
+  - "/accounts"
+  - "/accounts/{account_id}/members"
+  - "/accounts/{account_id}/rulesets"
+  - "/accounts/{account_id}/access/apps"
+  - "/accounts/{account_id}/access/groups"
+  - "/accounts/{account_id}/workers/scripts"
+  - "/accounts/{account_id}/workers/scripts/{script_name}/schedules"
+  - "/accounts/{account_id}/images/v1"
+  - "/zones"
+  - "/zones/{zone_id}/settings"
+  - "/zones/{zone_id}/dns_records"
+  - "/zones/{zone_id}/rulesets"
+  - "/zones/{zone_id}/ssl/certificate_packs?status=all"
+  - "/zones/{zone_id}/custom_hostnames"
+  - "/zones/{zone_id}/pagerules"
+  - "/zones/{zone_id}/firewall/waf/packages"
+  - "/zones/{zone_id}/firewall/waf/overrides"
+  - "/zones/{zone_id}/workers/routes"
+security_rules:
+  - code: "CF-WAF-001"
+    severity: "HIGH"
+    description: "Detects zones without active WAF managed rulesets or legacy WAF packages"
+  - code: "CF-LEAK-001"
+    severity: "HIGH"
+    description: "Detects public A/AAAA/CNAME DNS records with proxied=false exposing origin IP/hostname"
+  - code: "CF-SSL-001"
+    severity: "CRITICAL"
+    description: "Detects zones with SSL/TLS encryption mode set to off or flexible"
+  - code: "CF-SSL-002"
+    severity: "MEDIUM"
+    description: "Detects zones with Minimum TLS Version lower than TLS 1.2"
+  - code: "CF-SSL-003"
+    severity: "LOW"
+    description: "Detects zones with Always Use HTTPS disabled"
+  - code: "CF-DNS-001"
+    severity: "MEDIUM"
+    description: "Detects zones missing SPF or DMARC TXT anti-spoofing DNS records"
+  - code: "CF-IAM-MFA-001"
+    severity: "HIGH"
+    description: "Detects Cloudflare account members without 2FA enabled"
+tables:
+  - name: "cloudflare_access_applications"
+    description: "Cloudflare Zero Trust Access applications configured at account or zone level (CloudQuery cloudflare_access_applications)"
+    parent: "cloudflare_accounts"
+    columns_count: 29
+  - name: "cloudflare_access_groups"
+    description: "Cloudflare Zero Trust Access groups defining reusable include/exclude/require identity rules (CloudQuery cloudflare_access_groups)"
+    parent: "cloudflare_accounts"
+    columns_count: 15
+  - name: "cloudflare_account_members"
+    description: "Cloudflare account members, roles, MFA status, and access policies (CloudQuery cloudflare_account_members)"
+    parent: "cloudflare_accounts"
+    columns_count: 14
+  - name: "cloudflare_account_rulesets"
+    description: "Account-wide Cloudflare WAF, DDoS, and Magic Transit rulesets (CloudQuery cloudflare_account_rulesets)"
+    parent: "cloudflare_accounts"
+    columns_count: 15
+  - name: "cloudflare_accounts"
+    description: "Cloudflare accounts accessible to the API token (CloudQuery cloudflare_accounts)"
+    columns_count: 12
+  - name: "cloudflare_certificate_packs"
+    description: "Cloudflare Universal, Advanced, and Custom SSL/TLS certificate packs per zone (CloudQuery cloudflare_certificate_packs)"
+    parent: "cloudflare_zones"
+    columns_count: 21
+  - name: "cloudflare_custom_hostnames"
+    description: "Cloudflare for SaaS Custom Hostnames and SSL configuration per zone (CloudQuery cloudflare_custom_hostnames)"
+    parent: "cloudflare_zones"
+    columns_count: 16
+  - name: "cloudflare_dns_records"
+    description: "Cloudflare DNS records per zone with full proxy status, TTL, priority, tags, comments, and timestamps (CloudQuery cloudflare_dns_records)"
+    parent: "cloudflare_zones"
+    columns_count: 27
+  - name: "cloudflare_images"
+    description: "Cloudflare Images stored in the account (CloudQuery cloudflare_images)"
+    parent: "cloudflare_accounts"
+    columns_count: 13
+  - name: "cloudflare_page_rules"
+    description: "Cloudflare Page Rules per zone with URL targets, forwarding/cache/security actions, and priority (CloudQuery cloudflare_page_rules)"
+    parent: "cloudflare_zones"
+    columns_count: 14
+  - name: "cloudflare_security_findings"
+    description: "Automated Cloudflare security posture & root-cause audit findings with full evidence and remediation steps"
+    parent: "cloudflare_zones"
+    columns_count: 25
+  - name: "cloudflare_waf_groups"
+    description: "Cloudflare WAF rule groups inside each WAF package (CloudQuery cloudflare_waf_groups)"
+    parent: "cloudflare_zones"
+    columns_count: 16
+  - name: "cloudflare_waf_overrides"
+    description: "URI-based Cloudflare WAF overrides per zone (CloudQuery cloudflare_waf_overrides)"
+    parent: "cloudflare_zones"
+    columns_count: 15
+  - name: "cloudflare_waf_packages"
+    description: "Cloudflare WAF Managed Packages per zone (CloudQuery cloudflare_waf_packages)"
+    parent: "cloudflare_zones"
+    columns_count: 13
+  - name: "cloudflare_waf_rules"
+    description: "Individual Cloudflare WAF managed rules per package (CloudQuery cloudflare_waf_rules)"
+    parent: "cloudflare_zones"
+    columns_count: 17
+  - name: "cloudflare_worker_cron_triggers"
+    description: "Scheduled Cron Triggers attached to Cloudflare Worker scripts (CloudQuery cloudflare_worker_cron_triggers)"
+    parent: "cloudflare_accounts"
+    columns_count: 10
+  - name: "cloudflare_worker_meta_data"
+    description: "Cloudflare Workers scripts deployed in the account (CloudQuery cloudflare_worker_meta_data)"
+    parent: "cloudflare_accounts"
+    columns_count: 16
+  - name: "cloudflare_worker_routes"
+    description: "Cloudflare Workers URL route bindings per zone (CloudQuery cloudflare_worker_routes)"
+    parent: "cloudflare_zones"
+    columns_count: 11
+  - name: "cloudflare_zone_ruleset_rules"
+    description: "Individual firewall, WAF, DDoS, rate-limit, and transform rules inside each Cloudflare zone ruleset"
+    parent: "cloudflare_zones"
+    columns_count: 23
+  - name: "cloudflare_zone_rulesets"
+    description: "Cloudflare modern Rulesets Engine phases per zone (WAF Custom, WAF Managed, Rate Limiting, DDoS, Transform, Cache, Redirects)"
+    parent: "cloudflare_zones"
+    columns_count: 17
+  - name: "cloudflare_zone_settings"
+    description: "Cloudflare zone security, SSL/TLS, WAF, caching, and network settings (~56 settings per zone)"
+    parent: "cloudflare_zones"
+    columns_count: 14
+  - name: "cloudflare_zones"
+    description: "Cloudflare DNS zones with full plan, owner, registrar, nameserver, and tenant metadata (CloudQuery cloudflare_zones)"
+    columns_count: 30

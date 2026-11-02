@@ -1,0 +1,60 @@
+name: aws
+version: "v1.2.0"
+protocol: native
+description: "AWS 16-table multi-region inventory and security source"
+tables:
+  - name: "aws_accounts"
+    description: "AWS STS caller account metadata"
+    columns_count: 9
+  - name: "aws_cloudfront_distributions"
+    description: "AWS CloudFront CDN distributions"
+    columns_count: 15
+  - name: "aws_cognito_user_pools"
+    description: "AWS Cognito User Pools"
+    columns_count: 13
+  - name: "aws_dynamodb_tables"
+    description: "AWS DynamoDB tables"
+    columns_count: 14
+  - name: "aws_ec2_images"
+    description: "AWS EC2 Amazon Machine Images (AMIs) owned by the account"
+    columns_count: 13
+  - name: "aws_ec2_instances"
+    description: "AWS EC2 compute instances across accounts and regions"
+    columns_count: 18
+  - name: "aws_ec2_network_interfaces"
+    description: "AWS EC2 elastic network interfaces (ENIs)"
+    columns_count: 15
+  - name: "aws_ec2_route_tables"
+    description: "AWS VPC route tables"
+    columns_count: 12
+  - name: "aws_ec2_security_groups"
+    description: "AWS EC2/VPC security groups and ingress/egress rules"
+    columns_count: 14
+  - name: "aws_ec2_subnets"
+    description: "AWS VPC subnets"
+    columns_count: 14
+  - name: "aws_ec2_volumes"
+    description: "AWS EBS volumes"
+    columns_count: 16
+  - name: "aws_ec2_vpcs"
+    description: "AWS Virtual Private Clouds (VPCs)"
+    columns_count: 12
+  - name: "aws_iam_users"
+    description: "AWS IAM users, MFA posture, and access key metadata"
+    columns_count: 13
+  - name: "aws_lambda_functions"
+    description: "AWS Lambda serverless functions"
+    columns_count: 16
+  - name: "aws_route53_hosted_zone_resource_record_sets"
+    description: "AWS Route53 DNS resource record sets per hosted zone"
+    parent: "aws_route53_hosted_zones"
+    columns_count: 12
+  - name: "aws_route53_hosted_zones"
+    description: "AWS Route53 public and private hosted zones"
+    columns_count: 11
+  - name: "aws_s3_buckets"
+    description: "AWS S3 buckets and encryption/public-access posture"
+    columns_count: 12
+  - name: "aws_wafv2_web_acls"
+    description: "AWS WAFv2 Regional and CloudFront Web ACLs"
+    columns_count: 14

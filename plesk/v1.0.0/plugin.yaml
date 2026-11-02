@@ -1,0 +1,115 @@
+# ==============================================================================
+# syncany Declarative YAML Plugin: Plesk (v1.0.0)
+# ==============================================================================
+
+name: plesk
+version: "v1.0.0"
+protocol: yaml
+description: "Plesk Obsidian Server Info, Domains, Clients & ModSecurity WAF via REST API v2"
+base_url: "https://localhost:8443/api/v2"
+base_url_env: "PLESK_HOST"
+
+auth:
+  type: header
+  header_name: "X-API-Key"
+  token_env:
+    - PLESK_API_KEY
+    - PLESK_TOKEN
+
+tables:
+  - name: plesk_servers
+    description: "Plesk Server metadata, version, and platform information"
+    endpoint: "/server"
+    results_path: ""
+    primary_key:
+      - guid
+    columns:
+      - name: guid
+        type: utf8
+        path: guid
+        primary_key: true
+      - name: hostname
+        type: utf8
+        path: hostname
+      - name: panel_version
+        type: utf8
+        path: panel_version
+      - name: platform
+        type: utf8
+        path: platform
+
+  - name: plesk_domains
+    description: "Domains and subscriptions hosted in Plesk"
+    endpoint: "/domains"
+    results_path: ""
+    primary_key:
+      - id
+    columns:
+      - name: id
+        type: int64
+        path: id
+        primary_key: true
+      - name: name
+        type: utf8
+        path: name
+      - name: ascii_name
+        type: utf8
+        path: ascii_name
+      - name: guid
+        type: utf8
+        path: guid
+      - name: created
+        type: utf8
+        path: created
+      - name: hosting_type
+        type: utf8
+        path: hosting_type
+      - name: www_root
+        type: utf8
+        path: www_root
+
+  - name: plesk_clients
+    description: "Plesk customer and reseller accounts"
+    endpoint: "/clients"
+    results_path: ""
+    primary_key:
+      - id
+    columns:
+      - name: id
+        type: int64
+        path: id
+        primary_key: true
+      - name: login
+        type: utf8
+        path: login
+      - name: name
+        type: utf8
+        path: name
+      - name: email
+        type: utf8
+        path: email
+      - name: status
+        type: utf8
+        path: status
+      - name: type
+        type: utf8
+        path: type
+
+  - name: plesk_waf_modsecurity
+    description: "Plesk Web Application Firewall (ModSecurity) posture per domain"
+    endpoint: "/domains"
+    results_path: ""
+    primary_key:
+      - guid
+    columns:
+      - name: guid
+        type: utf8
+        path: guid
+        primary_key: true
+      - name: domain_name
+        type: utf8
+        path: name
+      - name: hosting_type
+        type: utf8
+        path: hosting_type
+

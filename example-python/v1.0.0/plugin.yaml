@@ -1,0 +1,5 @@
+name: example
+version: "v1.0.0"
+description: "Reference Python subprocess plugin speaking Syncany NDJSON over stdin/stdout"
+protocol: subprocess
+command: ["python3", "main.py"]

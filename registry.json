@@ -1,0 +1,67 @@
+{
+  "registry_version": "1.0",
+  "repository": "https://raw.githubusercontent.com/neid-seceng/syncany-plugins/main",
+  "plugins": {
+    "aws": {
+      "latest": "v1.2.0",
+      "versions": {
+        "v1.2.0": {
+          "kind": "native",
+          "url": "https://raw.githubusercontent.com/neid-seceng/syncany-plugins/main/dist/aws-v1.2.0.tar.gz",
+          "sha256": "2335fe6b9846570fb91963dd99424e095e6378279bbe377003b14ce17f588cdc",
+          "description": "AWS 16-table multi-region inventory and security source"
+        }
+      }
+    },
+    "cloudflare": {
+      "latest": "v1.1.0",
+      "versions": {
+        "v1.0.0": {
+          "kind": "native",
+          "url": "https://raw.githubusercontent.com/neid-seceng/syncany-plugins/main/dist/cloudflare-v1.0.0.tar.gz",
+          "sha256": "d476b59c5155eb838cf0944ee154a8292df6674ef13f3ef9d738a97cb6c36d2b",
+          "description": "Cloudflare 22-table CloudQuery-compatible source with single-flight API request cache and automated security posture evaluation"
+        },
+        "v1.1.0": {
+          "kind": "native",
+          "url": "https://raw.githubusercontent.com/neid-seceng/syncany-plugins/main/dist/cloudflare-v1.1.0.tar.gz",
+          "sha256": "b0668b348f0fedc1cde4bd075905974aca9841ecf95a63eec9587a976a9fc5c8",
+          "description": "Cloudflare 22-table CloudQuery-compatible source with single-flight API request cache and automated security posture evaluation"
+        }
+      }
+    },
+    "example-python": {
+      "latest": "v1.0.0",
+      "versions": {
+        "v1.0.0": {
+          "kind": "subprocess",
+          "url": "https://raw.githubusercontent.com/neid-seceng/syncany-plugins/main/dist/example-python-v1.0.0.tar.gz",
+          "sha256": "98ad08d675f8d9ae1974a5a00dd7c6e5c4492d146ca36e4e5f673f494fb850b3",
+          "description": "Reference Python subprocess plugin speaking Syncany NDJSON over stdin/stdout"
+        }
+      }
+    },
+    "github": {
+      "latest": "v1.0.0",
+      "versions": {
+        "v1.0.0": {
+          "kind": "yaml",
+          "url": "https://raw.githubusercontent.com/neid-seceng/syncany-plugins/main/dist/github-v1.0.0.tar.gz",
+          "sha256": "82a47ef924c067e4f012c2d1cae0db2c7f9d3e4cc2d7128a94eacbc3620593ff",
+          "description": "GitHub Repositories & Branches inventory via REST API v3"
+        }
+      }
+    },
+    "plesk": {
+      "latest": "v1.0.0",
+      "versions": {
+        "v1.0.0": {
+          "kind": "yaml",
+          "url": "https://raw.githubusercontent.com/neid-seceng/syncany-plugins/main/dist/plesk-v1.0.0.tar.gz",
+          "sha256": "37f76d1138f23ecd5dbdff310cf66d473fb37b676ff1a3ce8c624648a9bbee73",
+          "description": "Plesk Obsidian Server Info, Domains, Clients & ModSecurity WAF via REST API v2"
+        }
+      }
+    }
+  }
+}
