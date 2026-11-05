@@ -3,18 +3,34 @@
   "repository": "https://raw.githubusercontent.com/neid-seceng/syncany-plugins/main",
   "plugins": {
     "aws": {
-      "latest": "v1.2.0",
+      "latest": "v1.3.0",
       "versions": {
         "v1.2.0": {
           "kind": "native",
           "url": "https://raw.githubusercontent.com/neid-seceng/syncany-plugins/main/dist/aws-v1.2.0.tar.gz",
           "sha256": "2335fe6b9846570fb91963dd99424e095e6378279bbe377003b14ce17f588cdc",
           "description": "AWS 16-table multi-region inventory and security source"
+        },
+        "v1.3.0": {
+          "kind": "subprocess",
+          "url": "",
+          "sha256": "",
+          "description": "AWS multi-account, multi-region asset and security posture source (EC2, VPC, S3, Route53, IAM, WAFv2, Lambda, DynamoDB, CloudFront, Cognito)",
+          "artifacts": {
+            "linux-arm64": {
+              "url": "https://github.com/neid-seceng/syncany-plugins/releases/download/aws-v1.3.0/aws-v1.3.0-linux-arm64.tar.gz",
+              "sha256": "d920684c86dcce96057100d4001b2f2d5600daf6cdc3f6d5eaf0ee80351d8335"
+            },
+            "darwin-arm64": {
+              "url": "https://github.com/neid-seceng/syncany-plugins/releases/download/aws-v1.3.0/aws-v1.3.0-darwin-arm64.tar.gz",
+              "sha256": "d1f788161511c18c1f78e046e7deb2bb2a09c6b6f5bdcb36c7ccd7ab59b064a9"
+            }
+          }
         }
       }
     },
     "cloudflare": {
-      "latest": "v1.1.0",
+      "latest": "v1.2.0",
       "versions": {
         "v1.0.0": {
           "kind": "native",
@@ -27,6 +43,22 @@
           "url": "https://raw.githubusercontent.com/neid-seceng/syncany-plugins/main/dist/cloudflare-v1.1.0.tar.gz",
           "sha256": "b0668b348f0fedc1cde4bd075905974aca9841ecf95a63eec9587a976a9fc5c8",
           "description": "Cloudflare 22-table CloudQuery-compatible source with single-flight API request cache and automated security posture evaluation"
+        },
+        "v1.2.0": {
+          "kind": "subprocess",
+          "url": "",
+          "sha256": "",
+          "description": "Cloudflare 22-table CloudQuery-compatible source with single-flight API request cache and automated security posture evaluation",
+          "artifacts": {
+            "linux-arm64": {
+              "url": "https://github.com/neid-seceng/syncany-plugins/releases/download/cloudflare-v1.2.0/cloudflare-v1.2.0-linux-arm64.tar.gz",
+              "sha256": "04aaacd87ab4a9d837c2a3b5365bf5ad54ecb6d1bae374299c9ff72d6ab4c259"
+            },
+            "darwin-arm64": {
+              "url": "https://github.com/neid-seceng/syncany-plugins/releases/download/cloudflare-v1.2.0/cloudflare-v1.2.0-darwin-arm64.tar.gz",
+              "sha256": "701437ab21d4e2b267a55fdc9c2840340ef5c4e0b21545420bccca04721e9ca5"
+            }
+          }
         }
       }
     },
