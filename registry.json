@@ -3,7 +3,7 @@
   "repository": "https://raw.githubusercontent.com/neid-seceng/syncany-plugins/main",
   "plugins": {
     "aws": {
-      "latest": "v1.3.0",
+      "latest": "v1.4.0",
       "versions": {
         "v1.2.0": {
           "kind": "native",
@@ -24,6 +24,22 @@
             "darwin-arm64": {
               "url": "https://github.com/neid-seceng/syncany-plugins/releases/download/aws-v1.3.0/aws-v1.3.0-darwin-arm64.tar.gz",
               "sha256": "d1f788161511c18c1f78e046e7deb2bb2a09c6b6f5bdcb36c7ccd7ab59b064a9"
+            }
+          }
+        },
+        "v1.4.0": {
+          "kind": "subprocess",
+          "url": "",
+          "sha256": "",
+          "description": "Multi-account AWS source reading EC2, VPC, S3, DynamoDB, Secrets Manager, Lambda, Systems Manager, IAM, Identity Center, Account, API Gateway and CloudFormation through IAM roles with an ExternalId",
+          "artifacts": {
+            "linux-arm64": {
+              "url": "https://github.com/neid-seceng/syncany-plugins/releases/download/aws-v1.4.0/aws-v1.4.0-linux-arm64.tar.gz",
+              "sha256": "6e26c8850debadb5064c7eef5eb9cfb1e2199e96871b35b515e14de44319bef4"
+            },
+            "darwin-arm64": {
+              "url": "https://github.com/neid-seceng/syncany-plugins/releases/download/aws-v1.4.0/aws-v1.4.0-darwin-arm64.tar.gz",
+              "sha256": "40cd1d4bf4b14ab7178b9937315f5286625aa61ab7b1b8e848685f309c08be39"
             }
           }
         }
